@@ -20,5 +20,6 @@ public class CategoriesController : Controller
         List<Category> categories = await _appDataContext.Categories.ToListAsync();
 
         return Ok(categories);
+        //aa
     }
 }
