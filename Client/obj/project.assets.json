@@ -1577,11 +1577,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\Client.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\x-sama\\DevPortfolio_Important\\Client\\Client.csproj",
       "projectName": "Client",
-      "projectPath": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\Client.csproj",
+      "projectPath": "C:\\Users\\User\\Source\\Repos\\x-sama\\DevPortfolio_Important\\Client\\Client.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\obj\\",
+      "outputPath": "C:\\Users\\User\\Source\\Repos\\x-sama\\DevPortfolio_Important\\Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1598,8 +1598,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Shared\\Shared.csproj": {
-              "projectPath": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Shared\\Shared.csproj"
+            "C:\\Users\\User\\Source\\Repos\\x-sama\\DevPortfolio_Important\\Shared\\Shared.csproj": {
+              "projectPath": "C:\\Users\\User\\Source\\Repos\\x-sama\\DevPortfolio_Important\\Shared\\Shared.csproj"
             }
           }
         }
