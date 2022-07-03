@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Source\\Repos\\x-sama\\DevPortfolio_Important\\Shared\\Shared.csproj": {}
+    "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Shared\\Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Source\\Repos\\x-sama\\DevPortfolio_Important\\Shared\\Shared.csproj": {
+    "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Shared\\Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\x-sama\\DevPortfolio_Important\\Shared\\Shared.csproj",
+        "projectUniqueName": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Shared\\Shared.csproj",
         "projectName": "Shared",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\x-sama\\DevPortfolio_Important\\Shared\\Shared.csproj",
+        "projectPath": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Shared\\Shared.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\x-sama\\DevPortfolio_Important\\Shared\\obj\\",
+        "outputPath": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -11,41 +11,41 @@ build_property.EnableTrimAnalyzer = true
 build_property.IncludeAllContentForSelfExtract = 
 build_property.RootNamespace = Client
 build_property.RootNamespace = Client
-build_property.ProjectDir = C:\Users\User\Source\Repos\x-sama\DevPortfolio_Important\Client\
+build_property.ProjectDir = C:\Users\User\RiderProjects\DevPortfolio\Client\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\User\Source\Repos\x-sama\DevPortfolio_Important\Client
+build_property.MSBuildProjectDirectory = C:\Users\User\RiderProjects\DevPortfolio\Client
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/User/Source/Repos/x-sama/DevPortfolio_Important/Client/App.razor]
+[C:/Users/User/RiderProjects/DevPortfolio/Client/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/x-sama/DevPortfolio_Important/Client/Components/Public/Blog/BlogCard.razor]
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Components/Public/Blog/BlogCard.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQdWJsaWNcQmxvZ1xCbG9nQ2FyZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/x-sama/DevPortfolio_Important/Client/Components/Public/Shared/Footer.razor]
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Components/Public/Shared/Footer.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQdWJsaWNcU2hhcmVkXEZvb3Rlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/x-sama/DevPortfolio_Important/Client/Pages/Public/Blog.razor]
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Public/Blog.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHVibGljXEJsb2cucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/x-sama/DevPortfolio_Important/Client/Pages/Public/Index.razor]
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Public/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHVibGljXEluZGV4LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/x-sama/DevPortfolio_Important/Client/_Imports.razor]
+[C:/Users/User/RiderProjects/DevPortfolio/Client/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/Source/Repos/x-sama/DevPortfolio_Important/Client/Components/Public/Shared/NavBar.razor]
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Components/Public/Shared/NavBar.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQdWJsaWNcU2hhcmVkXE5hdkJhci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-ktkhvttqzk
 
-[C:/Users/User/Source/Repos/x-sama/DevPortfolio_Important/Client/MainLayout.razor]
+[C:/Users/User/RiderProjects/DevPortfolio/Client/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-baewqqmwdu
