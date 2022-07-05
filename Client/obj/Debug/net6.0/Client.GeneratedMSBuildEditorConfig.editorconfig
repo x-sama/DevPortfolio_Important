@@ -30,12 +30,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQdWJsaWNcU2hhcmVkXEZvb3Rlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Public/About.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHVibGljXEFib3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Public/Blog.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHVibGljXEJsb2cucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Public/Contact.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHVibGljXENvbnRhY3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Public/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHVibGljXEluZGV4LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Public/Portfolio.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHVibGljXFBvcnRmb2xpby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Public/Skills.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHVibGljXFNraWxscy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/RiderProjects/DevPortfolio/Client/_Imports.razor]
