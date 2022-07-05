@@ -1,4 +1,4 @@
-﻿<nav class="navbar nav-underline navbar-expand-lg d-flex navbar-light shadow-no-hover justify-content-between align-items-center p-lg-3">
+﻿<nav class="navbar nav-underline navbar-expand-lg d-flex flex-wrap navbar-light shadow-no-hover justify-content-between align-items-center p-lg-3">
     <a href="/" class="navbar-brand md-f-size-1-5 text-dark ps-2 m-0 mx-lg-5 fw-bold">
         Valravn <span class="text-dark fw-normal">&#8211; .NET Developers</span>
     </a>
@@ -14,8 +14,28 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="@SkillPageUri" class="nav-link mx-5 md-and-smaller-my-3 @(IsPageActive(SkillPageUri) ? "active" : String.Empty)">
+                    Skills
+                </a>
+            </li> 
+            <li class="nav-item">
+                <a href="@PortfolioPageUri" class="nav-link mx-5 md-and-smaller-my-3 @(IsPageActive(PortfolioPageUri) ? "active" : String.Empty)">
+                    Portfolio
+                </a>
+            </li>   
+            <li class="nav-item">
                 <a href="@BlogPageUri" class="nav-link mx-5 md-and-smaller-my-3 @(IsPageActive(BlogPageUri) ? "active" : String.Empty)">
                     Blog
+                </a>
+            </li>    
+            <li class="nav-item">
+                <a href="@AboutPageUri" class="nav-link mx-5 md-and-smaller-my-3 @(IsPageActive(AboutPageUri) ? "active" : String.Empty)">
+                    About
+                </a>
+            </li>     
+            <li class="nav-item">
+                <a href="@ContactPageUri" class="nav-link mx-5 md-and-smaller-my-3 @(IsPageActive(ContactPageUri) ? "active" : String.Empty)">
+                    Contact
                 </a>
             </li>
         </ul>
@@ -26,7 +46,11 @@
     [Inject] public NavigationManager NavigationManager { get; set; }
 
         private const string HomePageUri = "/";
+        private const string SkillPageUri = "/skills";
+        private const string PortfolioPageUri = "/portfolio";
         private const string BlogPageUri = "/blog";
+        private const string AboutPageUri = "/about";
+        private const string ContactPageUri = "/contact";
 
 
     // this to make navigation link style working ... 
