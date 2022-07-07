@@ -26,6 +26,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQdWJsaWNcQmxvZ1xCbG9nQ2FyZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Components/Public/Portfolio/ExamplePortfolioProjectModelWindow.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQdWJsaWNcUG9ydGZvbGlvXEV4YW1wbGVQb3J0Zm9saW9Qcm9qZWN0TW9kZWxXaW5kb3cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/RiderProjects/DevPortfolio/Client/Components/Public/Shared/Footer.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQdWJsaWNcU2hhcmVkXEZvb3Rlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

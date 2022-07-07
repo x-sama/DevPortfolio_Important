@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TzF8F4+wFLANVGQb8IZcVguZre/XJUZhXetLiUqg4WY=",
+  "Hash": "WHm48DWHk0MOPIpSCNaGr9oitJuOKQu1i53KroXsO7Y=",
   "Source": "Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -6900,6 +6900,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Client.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\wwwroot\\assets\\docs\\test-pdf.pdf",
+      "SourceId": "Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "assets/docs/test-pdf.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\docs\\test-pdf.pdf"
     },
     {
       "Identity": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\wwwroot\\assets\\img\\publicbackgrounds\\bg-motherboard-dev.jpg",
