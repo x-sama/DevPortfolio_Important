@@ -6,12 +6,12 @@ using Shared.Models;
 namespace Server.Controllers;
 [ApiController]
 [Route("api/[controller]")]
-public class CategoriesController : Controller
+public class PostsController : Controller
 {
     private readonly AppDataContext _appDataContext;
     private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public CategoriesController(AppDataContext appDataContext , IWebHostEnvironment webHostEnvironment)
+    public PostsController(AppDataContext appDataContext , IWebHostEnvironment webHostEnvironment)
     {
         _appDataContext = appDataContext;
         _webHostEnvironment = webHostEnvironment;
@@ -22,40 +22,27 @@ public class CategoriesController : Controller
     [HttpGet]
     public async Task<IActionResult> Get ()
     {
-        List<Category> categories = await _appDataContext.Categories.ToListAsync();
+        List<Post> Posts = await _appDataContext.Posts.ToListAsync();
 
-        return Ok(categories);
+        return Ok(Posts);
       
     }
 
-    [HttpGet("withposts")]
-    public async Task<IActionResult> GetWithPosts()
-    {
-        List<Category> categories = await _appDataContext.Categories
-            .Include(category => category.Posts)
-            .ToListAsync();
-        return Ok(categories);
-    }  
+
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
-        Category category = await GetCategoriesByCategoryId(id,false);
-        return Ok(category);
-    } 
-    [HttpGet("withposts/{id}")]
-    public async Task<IActionResult> GetWithPosts(int id)
-    {
-        Category category = await GetCategoriesByCategoryId(id,true);
-        return Ok(category);
+        Post Post = await GetPostsByPostId(id);
+        return Ok(Post);
     }
-    
-    // create category method
+
+    // create Post method
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] Category? categoryToCreate)
+    public async Task<IActionResult> Create([FromBody] Post? postToCreate)
     {
         try
         {
-            if (categoryToCreate == null)
+            if (postToCreate == null)
             {
                 return BadRequest(ModelState);
             }
@@ -63,9 +50,13 @@ public class CategoriesController : Controller
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            } 
+            if (postToCreate.IsPublished)
+            {
+                postToCreate.PublishDate = DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm");
             }
 
-            await _appDataContext.Categories.AddAsync(categoryToCreate);
+            await _appDataContext.Posts.AddAsync(postToCreate);
             bool changesPersistToDatabase = await PersistChangesToDatabase();
             if (!changesPersistToDatabase)
             {
@@ -74,7 +65,7 @@ public class CategoriesController : Controller
             }
             else
             {
-                return Created("Create", categoryToCreate);
+                return Created("Create", postToCreate);
             }
             
         }
@@ -85,17 +76,17 @@ public class CategoriesController : Controller
         }
     } 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id,[FromBody] Category? categoryToUpdate)
+    public async Task<IActionResult> Update(int id,[FromBody] Post? postToUpdate)
     {
         try
         {
-            if (id<1 || categoryToUpdate == null || id != categoryToUpdate.CategoryId)
+            if (id<1 || postToUpdate == null || id != postToUpdate.PostId)
             {
                 return BadRequest(ModelState);
             }
 
-            bool exists = await _appDataContext.Categories.AnyAsync(c => c.CategoryId == id);
-            if (!exists)
+            Post oldPost = await _appDataContext.Posts.FindAsync(id);
+            if (oldPost == null)
             {
                 return NotFound();
             }
@@ -104,7 +95,14 @@ public class CategoriesController : Controller
                 return BadRequest(ModelState);
             }
 
-            _appDataContext.Categories.Update(categoryToUpdate);
+            if (!oldPost.IsPublished && postToUpdate.IsPublished) 
+            {
+                postToUpdate.PublishDate = DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm");
+            }
+            
+            //detached the oldPost from EF . else dont update
+            _appDataContext.Entry(oldPost).State = EntityState.Detached;
+            _appDataContext.Posts.Update(postToUpdate);
             bool changesPersistToDatabase = await PersistChangesToDatabase();
             if (!changesPersistToDatabase)
             {
@@ -113,7 +111,7 @@ public class CategoriesController : Controller
             }
             else
             {
-                return NoContent();
+                return Created("Create",postToUpdate);
             }
             
         }
@@ -134,7 +132,7 @@ public class CategoriesController : Controller
                 return BadRequest(ModelState);
             }
 
-            bool exists = await _appDataContext.Categories.AnyAsync(c => c.CategoryId == id);
+            bool exists = await _appDataContext.Posts.AnyAsync(c => c.PostId == id);
             if (!exists)
             {
                 return BadRequest(ModelState);
@@ -144,14 +142,14 @@ public class CategoriesController : Controller
                 return BadRequest(ModelState);
             }
 
-            Category categoryToDelete = await GetCategoriesByCategoryId(id, false);
-            if (categoryToDelete.ThumbnailImagePath != "uploads/placeholder.jpg")
+            Post PostToDelete = await GetPostsByPostId(id);
+            if (PostToDelete.ThumbnailImagePath != "uploads/placeholder.jpg")
             {
-                string fileName = categoryToDelete.ThumbnailImagePath.Split('/').Last();
+                string fileName = PostToDelete.ThumbnailImagePath.Split('/').Last();
                 System.IO.File.Delete($"{_webHostEnvironment.ContentRootPath}\\wwwroot\\uploads\\{fileName}");
             }
 
-            _appDataContext.Categories.Remove(categoryToDelete);
+            _appDataContext.Posts.Remove(PostToDelete);
             bool changesPersistToDatabase = await PersistChangesToDatabase();
             if (!changesPersistToDatabase)
             {
@@ -183,22 +181,12 @@ public class CategoriesController : Controller
     }
     [NonAction]
     [ApiExplorerSettings(IgnoreApi = true)]
-    private async Task<Category> GetCategoriesByCategoryId(int categoryId,bool withPosts)
+    private async Task<Post> GetPostsByPostId(int PostId)
     {
-        Category categoryToGet = null;
-        if (withPosts)
-        {
-            categoryToGet = await _appDataContext.Categories
-                .Include(category => category.Posts)
-                .FirstAsync(c => c.CategoryId == categoryId);
-          
-        }
-        else
-        {
-            categoryToGet = await _appDataContext.Categories
-                .FirstAsync(c => c.CategoryId == categoryId);
-        }
-        return categoryToGet;
+        Post postToGet = await _appDataContext.Posts
+            .Include(post => post.Category)
+            .FirstAsync(c => c.PostId == PostId);
+        return postToGet;
     }
 
     #endregion
