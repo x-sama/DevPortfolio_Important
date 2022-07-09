@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WHm48DWHk0MOPIpSCNaGr9oitJuOKQu1i53KroXsO7Y=",
+  "Hash": "zxsDpNCipPWimSkyYdgCR1jKda93/O8i2bhJXtf2xQ8=",
   "Source": "Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -6917,6 +6917,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\docs\\test-pdf.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\wwwroot\\assets\\img\\admincards\\categories-card-background.jpg",
+      "SourceId": "Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "assets/img/admincards/categories-card-background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\admincards\\categories-card-background.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\wwwroot\\assets\\img\\admincards\\posts-card-background.jpg",
+      "SourceId": "Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "assets/img/admincards/posts-card-background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\admincards\\posts-card-background.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\RiderProjects\\DevPortfolio\\Client\\wwwroot\\assets\\img\\publicbackgrounds\\bg-motherboard-dev.jpg",
