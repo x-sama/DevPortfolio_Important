@@ -62,3 +62,7 @@ C:\Users\User\RiderProjects\DevPortfolio\Server\obj\Debug\net6.0\refint\Server.d
 C:\Users\User\RiderProjects\DevPortfolio\Server\obj\Debug\net6.0\Server.pdb
 C:\Users\User\RiderProjects\DevPortfolio\Server\obj\Debug\net6.0\Server.genruntimeconfig.cache
 C:\Users\User\RiderProjects\DevPortfolio\Server\obj\Debug\net6.0\ref\Server.dll
+C:\Users\User\RiderProjects\DevPortfolio\Server\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\User\RiderProjects\DevPortfolio\Server\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\User\RiderProjects\DevPortfolio\Server\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\User\RiderProjects\DevPortfolio\Server\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
