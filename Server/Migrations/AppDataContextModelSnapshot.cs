@@ -71,6 +71,147 @@ namespace Server.Migrations
                             ThumbnailImagePath = "uploads/placeholder.jpg"
                         });
                 });
+
+            modelBuilder.Entity("Shared.Models.Post", b =>
+                {
+                    b.Property<int>("PostId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"), 1L, 1);
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(65536)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Excerpt")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PublishDate")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<string>("ThumbnailImagePath")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("PostId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Posts");
+
+                    b.HasData(
+                        new
+                        {
+                            PostId = 1,
+                            Author = "John Doe",
+                            CategoryId = 1,
+                            Content = "",
+                            Excerpt = "This is the excerpt for post 1. An excerpt is a little extraction from a larger piece of text. Sort of like a preview.",
+                            IsPublished = true,
+                            PublishDate = "09/07/2022 08:06",
+                            ThumbnailImagePath = "uploads/placeholder.jpg",
+                            Title = "First post"
+                        },
+                        new
+                        {
+                            PostId = 2,
+                            Author = "John Doe",
+                            CategoryId = 2,
+                            Content = "",
+                            Excerpt = "This is the excerpt for post 2. An excerpt is a little extraction from a larger piece of text. Sort of like a preview.",
+                            IsPublished = true,
+                            PublishDate = "09/07/2022 08:06",
+                            ThumbnailImagePath = "uploads/placeholder.jpg",
+                            Title = "Second post"
+                        },
+                        new
+                        {
+                            PostId = 3,
+                            Author = "John Doe",
+                            CategoryId = 3,
+                            Content = "",
+                            Excerpt = "This is the excerpt for post 3. An excerpt is a little extraction from a larger piece of text. Sort of like a preview.",
+                            IsPublished = true,
+                            PublishDate = "09/07/2022 08:06",
+                            ThumbnailImagePath = "uploads/placeholder.jpg",
+                            Title = "Third post"
+                        },
+                        new
+                        {
+                            PostId = 4,
+                            Author = "John Doe",
+                            CategoryId = 1,
+                            Content = "",
+                            Excerpt = "This is the excerpt for post 4. An excerpt is a little extraction from a larger piece of text. Sort of like a preview.",
+                            IsPublished = true,
+                            PublishDate = "09/07/2022 08:06",
+                            ThumbnailImagePath = "uploads/placeholder.jpg",
+                            Title = "Fourth post"
+                        },
+                        new
+                        {
+                            PostId = 5,
+                            Author = "John Doe",
+                            CategoryId = 2,
+                            Content = "",
+                            Excerpt = "This is the excerpt for post 5. An excerpt is a little extraction from a larger piece of text. Sort of like a preview.",
+                            IsPublished = true,
+                            PublishDate = "09/07/2022 08:06",
+                            ThumbnailImagePath = "uploads/placeholder.jpg",
+                            Title = "Fifth post"
+                        },
+                        new
+                        {
+                            PostId = 6,
+                            Author = "John Doe",
+                            CategoryId = 3,
+                            Content = "",
+                            Excerpt = "This is the excerpt for post 6. An excerpt is a little extraction from a larger piece of text. Sort of like a preview.",
+                            IsPublished = true,
+                            PublishDate = "09/07/2022 08:06",
+                            ThumbnailImagePath = "uploads/placeholder.jpg",
+                            Title = "Sixth post"
+                        });
+                });
+
+            modelBuilder.Entity("Shared.Models.Post", b =>
+                {
+                    b.HasOne("Shared.Models.Category", "Category")
+                        .WithMany("Posts")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Shared.Models.Category", b =>
+                {
+                    b.Navigation("Posts");
+                });
 #pragma warning restore 612, 618
         }
     }
