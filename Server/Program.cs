@@ -7,8 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // data base connection services 
 
+#if DEBUG
+builder.Services.AddDbContext<AppDataContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
+#else
 builder.Services.AddDbContext<AppDataContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+#endif
+
 //todo : study cors 
 builder.Services.AddCors(options =>
 {
@@ -18,6 +24,8 @@ builder.Services.AddCors(options =>
         .AllowAnyHeader());
 });
 builder.Services.AddAutoMapper(typeof(DTOMapper));
+
+// ignore the shit loop man we know what we doing ...
 builder.Services.AddControllers().AddNewtonsoftJson(options=> options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,3 +1,23 @@
+/* /Components/Admin/SideBar.razor.rz.scp.css */
+@media (min-width: 768px) {
+    .admin-area-sidebar[b-s00qct4i3t] {
+        width: 200px;
+    }
+}
+
+@media (max-width: 767px) {
+    .admin-area-sidebar[b-s00qct4i3t] {
+        width: 75px;
+    }
+}
+
+.nav-pills .nav-link[b-s00qct4i3t] {
+    border-radius: 0px;
+}
+
+.nav-pills .nav-link:hover[b-s00qct4i3t] {
+    background-color: #115dce;
+}
 /* /Components/Public/Shared/NavBar.razor.rz.scp.css */
 .nav-link[b-ktkhvttqzk] {
     padding: 0.25rem 0;

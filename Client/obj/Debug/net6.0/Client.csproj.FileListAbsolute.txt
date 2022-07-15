@@ -821,3 +821,4 @@ C:\Users\User\RiderProjects\DevPortfolio\Client\bin\Debug\net6.0\Shared.dll
 C:\Users\User\RiderProjects\DevPortfolio\Client\bin\Debug\net6.0\Shared.pdb
 C:\Users\User\RiderProjects\DevPortfolio\Client\obj\Debug\net6.0\build-gz\aj4i0h+H.gz
 C:\Users\User\RiderProjects\DevPortfolio\Client\obj\Debug\net6.0\build-gz\kKF5qokY.gz
+C:\Users\User\RiderProjects\DevPortfolio\Client\obj\Debug\net6.0\scopedcss\Components\Admin\SideBar.razor.rz.scp.css
