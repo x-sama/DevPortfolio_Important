@@ -7,13 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // data base connection services 
 
-#if DEBUG
+
 builder.Services.AddDbContext<AppDataContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
-#else
-builder.Services.AddDbContext<AppDataContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-#endif
+
 
 //todo : study cors 
 builder.Services.AddCors(options =>
