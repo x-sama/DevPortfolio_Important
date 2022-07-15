@@ -14,7 +14,8 @@ public class ImageUploadController : Controller
    {
       _webHostEnvironment = webHostEnvironment;
    }
-    
+    // todo : fix where we can only call this post after we click create category button not when we upload the image . 
+    // todo : display the image when we choose it form the system file
     
    // the post listen method
    [HttpPost]

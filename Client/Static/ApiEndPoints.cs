@@ -11,4 +11,5 @@ internal static class ApiEndPoints
     #endif
 
     internal static readonly string SCategories = $"{ServerBaseUrl}/api/categories";
+    internal static readonly string SImageUpload = $"{ServerBaseUrl}/api/imageupload";
 }

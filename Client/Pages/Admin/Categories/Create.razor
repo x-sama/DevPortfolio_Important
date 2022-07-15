@@ -2,60 +2,74 @@
 @page "/admin/categories/create"
 
 <main class="admin-area-main">
-	<SideBar />
+	@if (_attemptingToCreateFailed)
+	{
+		<p>@_reasonImageUploadFailed</p>
+	}
+	<SideBar/>
 
-			<div class="admin-area-content container-fluid bg-white">
-				<div class="row g-0">
-					<div class="col">
+	<div class="admin-area-content container-fluid bg-white">
+		<div class="row g-0">
+			<div class="col">
 
-						<h1 class="mb-4">@(_createSucceded ? "Success! Go back to all categories to see the created category." : "Create category")</h1>
+				<h1 class="mb-4">@(_createSucceded ? "Success! Go back to all categories to see the created category." : "Create category")</h1>
 
-						@if (_attemptingToCreate == true)
-						{
-							<h1>Creating category...</h1>
-							<LoadingDot />
-						}
-						else if (_createSucceded == false && _attemptingToCreate == false)
-						{
-							<EditForm Model="_categoryToCreate" OnValidSubmit="CreateCategory">
-								<DataAnnotationsValidator />
+				@if (_attemptingToCreate == true)
+				{
+					<h1 class="h1 text-center text-secondary">Creating category...</h1>
+					<LoadingDot/>
+				}
+				else if (_createSucceded == false && _attemptingToCreate == false)
+				{
+					<EditForm Model="_categoryToCreate" OnValidSubmit="CreateCategory">
+						<DataAnnotationsValidator/>
 
-								<div class="form-group mb-5">
-									<label for="categoryName">Category name</label>
-									<InputText @bind-Value="_categoryToCreate.Name" class="form-control" id="categoryName"></InputText>
-								</div>
+						<div class="form-group mb-5">
+							<label for="categoryName">Category name</label>
+							<InputText @bind-Value="_categoryToCreate.Name" class="form-control" id="categoryName"></InputText>
+						</div>
 
-								<div class="form-group mb-5">
-									<label for="thumbnailImage">Thumbnail image (jpg/jpeg or png 1920x1080)</label>
-									
-										<img src="@($"{ApiEndPoints.ServerBaseUrl}/{_categoryToCreate.ThumbnailImagePath}")" class="admin-crud-form-thumbnail-image" alt="Post thumbnail image" />
+						<div class="form-group mb-5">
+							<label for="thumbnailImage">Thumbnail image (jpg/jpeg or png 1920x1080)</label>
+							
+							@if (_attemptingToUploadImage)
+							{
+								<LoadingDot />
+							}else if (_attemptToUploadFailed)
+							{
+								<h4 class="text-danger">Failed to upload the image. reason : @_reasonImageUploadFailed</h4>
+							}
+							else
+							{
+								<img src="@($"{ApiEndPoints.ServerBaseUrl}/{_categoryToCreate.ThumbnailImagePath}")" class="admin-crud-form-thumbnail-image" alt="Post thumbnail image"/>
+							}
 
-										<br />
+							<br/>
 
-									<InputFile  class="form-control mt-4" id="thumbnailImage" />
-								</div>
+							<InputFile OnChange="HandleImageUpload" class="form-control mt-4" id="thumbnailImage"/>
+						</div>
 
-								<div class="form-group mb-5">
-									<label for="categoryDescription">Category description</label>
-									<InputText @bind-Value="_categoryToCreate.Description" class="form-control" id="categoryDescription"></InputText>
-								</div>
+						<div class="form-group mb-5">
+							<label for="categoryDescription">Category description</label>
+							<InputText @bind-Value="_categoryToCreate.Description" class="form-control" id="categoryDescription"></InputText>
+						</div>
 
-								<ValidationSummary />
+						<ValidationSummary/>
 
-								<button class="btn btn-success shadow d-block mt-5 md-f-size-1-5" type="submit">
-									<i class="far fa-save"></i> Save
-								</button>
+						<button class="btn btn-success shadow d-block mt-5 md-f-size-1-5" type="submit">
+							<i class="far fa-save"></i> Save
+						</button>
 
-							</EditForm>
-						}
+					</EditForm>
+				}
 
-						<a href="/admin/categories" class="btn btn-primary shadow mt-5 md-f-size-1-5">
-							<i class="fas fa-arrow-left"></i> Back to all categories
-						</a>
-					</div>
-				</div>
+				<a href="/admin/categories" class="btn btn-primary shadow mt-5 md-f-size-1-5">
+					<i class="fas fa-arrow-left"></i> Back to all categories
+				</a>
 			</div>
-		</main>
+		</div>
+	</div>
+</main>
 
 
 @code {
@@ -93,6 +107,54 @@
         
         _attemptingToCreate = false;
     }
+	//image logic 
+	private bool _attemptingToUploadImage = false;
+	private bool _attemptToUploadFailed = false;
+	private string _reasonImageUploadFailed = null;
+
+	private async Task HandleImageUpload(InputFileChangeEventArgs e)
+	{
+		_attemptingToUploadImage = true;
+		if (e.File.ContentType != "image/jpeg" && e.File.ContentType != "image/png")
+		{
+			_reasonImageUploadFailed = "please Upload only JPG , JPEG or PNG images";
+			_attemptToUploadFailed = true;
+		}
+		else if (e.File.Size >= 31457280) // 30 megabyte 
+		{
+			_reasonImageUploadFailed = "pleas upload image less then 30 MegaBytes (30mb)";
+			_attemptToUploadFailed = true;
+		}
+		else
+		{
+			IBrowserFile uploadImageFile = e.File;
+
+			byte[] imageAsBytesArray = new byte[uploadImageFile.Size];
+			
+			//fills the contents of the image byte array
+			await uploadImageFile.OpenReadStream(31457280).ReadAsync(imageAsBytesArray);
+			string byteString = Convert.ToBase64String(imageAsBytesArray);
+			UploadedImage uploadedImage = new UploadedImage()
+			{
+				NewImageFileExtension = uploadImageFile.Name.Substring(uploadImageFile.Name.Length - 4),
+				NewImageBase64Content = byteString,
+				OldImagePath = string.Empty
+			};
+			HttpResponseMessage response = await HttpClient.PostAsJsonAsync<UploadedImage>(ApiEndPoints.SImageUpload, uploadedImage);
+			if (response.StatusCode == HttpStatusCode.Created)
+			{
+				_categoryToCreate.ThumbnailImagePath = await response.Content.ReadAsStringAsync();
+			}
+			else
+			{
+				_reasonImageUploadFailed = $"something went wrong when making a request to the server . server error {response.StatusCode}. server reason : {response.ReasonPhrase}";
+				_attemptingToCreateFailed = true;
+			}
+
+		}
+		_attemptingToCreate = false;
+		StateHasChanged();
+	}
 
 
 }
