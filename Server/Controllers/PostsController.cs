@@ -31,6 +31,13 @@ public class PostsController : Controller
       
     }
 
+    [HttpGet("dto/{id}")]
+    public async Task<IActionResult> GetDto(int id)
+    {
+        Post Post = await GetPostsByPostId(id);
+        PostDTO postDTO = _mapper.Map<PostDTO>(Post);
+        return Ok(postDTO);
+    }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)

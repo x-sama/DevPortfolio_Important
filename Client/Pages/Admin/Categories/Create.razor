@@ -91,7 +91,7 @@
         _attemptingToCreate = true;
 
         HttpResponseMessage responseMessage = await HttpClient.PostAsJsonAsync
-            <Category>(ApiEndPoints.SCategories, _categoryToCreate);
+            <Category>(ApiEndPoints.s_categories, _categoryToCreate);
 
         if (responseMessage.StatusCode == HttpStatusCode.Created)
         {

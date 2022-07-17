@@ -20,7 +20,7 @@
 								<i class="fas fa-plus"></i> Create category
 							</a>
 
-							<button @onclick="() => InMemoryDataCache.GetCategoriesFromDatabaseAndCache()" class="btn btn-primary shadow md-f-size-1-5">
+							<button @onclick="() => InMemoryDataCache.GetCategoriesFromDatabaseAndCache(true)" class="btn btn-primary shadow md-f-size-1-5">
 								<i class="fas fa-sync"></i> Refresh data
 							</button>
 
@@ -112,7 +112,7 @@
         InMemoryDataCache.OnCategoriesDataChanged += StateHasChanged;
         if (InMemoryDataCache.Categories == null)
         {
-           await  InMemoryDataCache.GetCategoriesFromDatabaseAndCache();
+           await  InMemoryDataCache.GetCategoriesFromDatabaseAndCache(true);
         }
     }
 
@@ -160,7 +160,7 @@
 		{
 			_attemptingToDeleteACategory = true;
 
-			HttpResponseMessage response = await HttpClient.DeleteAsync($"{ApiEndPoints.SCategories}/{categoryToDelete.CategoryId}"); 
+			HttpResponseMessage response = await HttpClient.DeleteAsync($"{ApiEndPoints.s_categories}/{categoryToDelete.CategoryId}"); 
 
 			if (response.StatusCode == HttpStatusCode.NoContent)
 			{

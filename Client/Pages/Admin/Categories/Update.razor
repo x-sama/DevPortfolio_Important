@@ -97,7 +97,7 @@
 	private Category _categoryToUpdate = null;
 	protected override async Task OnParametersSetAsync()
 	{
-		_categoryToUpdate = await InMemoryDataCach.GetCategoryById(CategoryId);
+		_categoryToUpdate = await InMemoryDataCach.GetCategoryByCategoryId(CategoryId,false);
 	}
 
 	private bool _attemptingToupdate = false;
@@ -109,7 +109,7 @@
         _attemptingToupdate = true;
 
         HttpResponseMessage responseMessage = await HttpClient.PutAsJsonAsync
-            <Category>($"{ApiEndPoints.SCategories}/{CategoryId}", _categoryToUpdate);
+            <Category>($"{ApiEndPoints.s_categories}/{CategoryId}", _categoryToUpdate);
 
         if (responseMessage.StatusCode == HttpStatusCode.NoContent)
         {

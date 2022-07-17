@@ -35,7 +35,7 @@
         InMemoryDataCach.OnCategoriesDataChanged += StateHasChanged;
         if (InMemoryDataCach.Categories == null)
         {
-            await InMemoryDataCach.GetCategoriesFromDatabaseAndCache();
+            await InMemoryDataCach.GetCategoriesFromDatabaseAndCache(true);
         }
     }
 
