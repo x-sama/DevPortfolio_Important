@@ -1,0 +1,183 @@
+﻿@using System.Net;
+@page "/admin/categories/update/{CategoryId:int}"
+
+<main class="admin-area-main">
+	@if (_attemptingToupdateFailed)
+	{
+		<p>@_reasonImageUploadFailed</p>
+	}
+	<SideBar/>
+
+	<div class="admin-area-content container-fluid bg-white">
+		<div class="row g-0">
+			<div class="col">
+
+				<h1 class="mb-4">Update Category</h1>
+
+				@if (_categoryToUpdate == null && _attemptingToupdate)
+				{
+					<LoadingDot/>
+				}
+				else
+				{
+					<EditForm Model="_categoryToUpdate" OnValidSubmit="UpdateCategory">
+						<DataAnnotationsValidator/>
+
+						<div class="form-group mb-5">
+							<label for="categoryName">Category name</label>
+							<InputText @bind-Value="_categoryToUpdate.Name" class="form-control" id="categoryName"></InputText>
+						</div>
+
+						<div class="form-group mb-5">
+							<label for="thumbnailImage">Thumbnail image (jpg/jpeg or png 1920x1080)</label>
+							
+							@if (_attemptingToUploadImage)
+							{
+								<LoadingDot />
+							}else if (_attemptToUploadFailed)
+							{
+								<h4 class="text-danger">Failed to upload the image. reason : @_reasonImageUploadFailed</h4>
+							}
+							else
+							{
+								<img src="@($"{ApiEndPoints.ServerBaseUrl}/{_categoryToUpdate.ThumbnailImagePath}")" class="admin-crud-form-thumbnail-image" alt="Post thumbnail image"/>
+							}
+
+							<br/>
+
+							<InputFile OnChange="HandleImageUpload" class="form-control mt-4" id="thumbnailImage"/>
+						</div>
+
+						<div class="form-group mb-5">
+							<label for="categoryDescription">Category description</label>
+							<InputText @bind-Value="_categoryToUpdate.Description" class="form-control" id="categoryDescription"></InputText>
+						</div>
+
+						<ValidationSummary/>
+
+						<button class="btn btn-success shadow d-block mt-5 md-f-size-1-5" type="submit">
+							<i class="far fa-save"></i> Save
+						</button>
+						<a href="/admin/categories" class="btn btn-primary shadow mt-5 md-f-size-1-5">
+							<i class="fas fa-arrow-left"></i> Back to all categories
+						</a>
+					</EditForm>
+				}
+				<div class="position-fized bottom-0 end-5 z-index-5">
+
+					@if (_updateSucceded == true)
+					{
+						<Toast IsError="false" ToastTitle="Update successful"
+						       ToastBody="Your changes have been saved to the database."
+						       ParentMethodToCallOnClickBtnClose="() => _updateSucceded = false" />
+					}
+
+					@if (_attemptingToupdateFailed == true)
+					{
+						<Toast IsError="true" ToastTitle="Update failed"
+						       ToastBody="Update failed. Please try again and if the issue persists contact the administrator."
+						       ParentMethodToCallOnClickBtnClose="() => _attemptingToupdateFailed = false" />
+					}
+
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+</main>
+
+
+@code {
+	[Parameter]
+	public int CategoryId { get; set; }
+	[Inject] HttpClient HttpClient { get; set; }
+    [Inject] InMemoryDataCach InMemoryDataCach { get; set; }
+
+	private Category _categoryToUpdate = null;
+	protected override async Task OnParametersSetAsync()
+	{
+		_categoryToUpdate = await InMemoryDataCach.GetCategoryById(CategoryId);
+	}
+
+	private bool _attemptingToupdate = false;
+    private bool _attemptingToupdateFailed = false;
+    private bool _updateSucceded = false;
+
+    private async Task UpdateCategory()
+    {
+        _attemptingToupdate = true;
+
+        HttpResponseMessage responseMessage = await HttpClient.PutAsJsonAsync
+            <Category>($"{ApiEndPoints.SCategories}/{CategoryId}", _categoryToUpdate);
+
+        if (responseMessage.StatusCode == HttpStatusCode.NoContent)
+        {
+	        //when we update the category in the database and in order to update it in the inMemoryCache , we need to make another call to grab it and store the updated 
+	        // category in database to the categories in memory list , but to reduce the db calls we did use this utility function that takes an unUpdated type . 
+	        // and place it properties into another type . so we did get the un Updated category from our list and replace it with the updated one we have here 
+	        Category unUpdatedCategoryInList = InMemoryDataCach.Categories.Single(category => category.CategoryId == CategoryId);
+	        UtilityFunctions.CopyObjectProperties(_categoryToUpdate,unUpdatedCategoryInList);
+
+	        
+            _updateSucceded = true;
+            
+        }
+        else
+        {
+            _attemptingToupdateFailed = true;
+        }
+        
+        _attemptingToupdate = false;
+    }
+	//image logic 
+	private bool _attemptingToUploadImage = false;
+	private bool _attemptToUploadFailed = false;
+	private string _reasonImageUploadFailed = null;
+
+	private async Task HandleImageUpload(InputFileChangeEventArgs e)
+	{
+		_attemptingToUploadImage = true;
+		if (e.File.ContentType != "image/jpeg" && e.File.ContentType != "image/png")
+		{
+			_reasonImageUploadFailed = "please Upload only JPG , JPEG or PNG images";
+			_attemptToUploadFailed = true;
+		}
+		else if (e.File.Size >= 31457280) // 30 megabyte 
+		{
+			_reasonImageUploadFailed = "pleas upload image less then 30 MegaBytes (30mb)";
+			_attemptToUploadFailed = true;
+		}
+		else
+		{
+			IBrowserFile uploadImageFile = e.File;
+
+			byte[] imageAsBytesArray = new byte[uploadImageFile.Size];
+			
+			//fills the contents of the image byte array
+			await uploadImageFile.OpenReadStream(31457280).ReadAsync(imageAsBytesArray);
+			string byteString = Convert.ToBase64String(imageAsBytesArray);
+			UploadedImage uploadedImage = new UploadedImage()
+			{
+				NewImageFileExtension = uploadImageFile.Name.Substring(uploadImageFile.Name.Length - 4),
+				NewImageBase64Content = byteString,
+				OldImagePath = string.Empty
+			};
+			HttpResponseMessage response = await HttpClient.PostAsJsonAsync<UploadedImage>(ApiEndPoints.SImageUpload, uploadedImage);
+			if (response.StatusCode == HttpStatusCode.Created)
+			{
+				_categoryToUpdate.ThumbnailImagePath = await response.Content.ReadAsStringAsync();
+			}
+			else
+			{
+				_reasonImageUploadFailed = $"something went wrong when making a request to the server . server error {response.StatusCode}. server reason : {response.ReasonPhrase}";
+				_attemptingToupdateFailed = true;
+			}
+
+		}
+		_attemptingToupdate = false;
+		StateHasChanged();
+	}
+
+
+}

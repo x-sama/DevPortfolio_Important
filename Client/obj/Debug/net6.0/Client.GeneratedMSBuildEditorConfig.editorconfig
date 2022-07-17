@@ -38,12 +38,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcTG9hZGluZ0RvdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Components/Shared/Toast.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xTaGFyZWRcVG9hc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Admin/Categories/Create.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ2F0ZWdvcmllc1xDcmVhdGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Admin/Categories/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ2F0ZWdvcmllc1xJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Admin/Categories/Update.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ2F0ZWdvcmllc1xVcGRhdGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/RiderProjects/DevPortfolio/Client/Pages/Admin/Index.razor]

@@ -25,6 +25,15 @@ internal sealed class InMemoryDataCach
         }
     }
 
+    internal async Task<Category> GetCategoryById(int categoryId)
+    {
+        if (_categories == null)
+        {
+            await GetCategoriesFromDatabaseAndCache();
+        }
+
+        return _categories.First(category => category.CategoryId == categoryId);
+    }
     private bool _gettingCategoriesFromDatabaseAndCaching = false;
     
     internal async Task GetCategoriesFromDatabaseAndCache()

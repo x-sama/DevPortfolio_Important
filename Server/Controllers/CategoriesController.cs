@@ -145,12 +145,13 @@ public class CategoriesController : Controller
             }
 
             Category categoryToDelete = await GetCategoriesByCategoryId(id, false);
+            // delete the category image from the image folder 
             if (categoryToDelete.ThumbnailImagePath != "uploads/placeholder.jpg")
             {
                 string fileName = categoryToDelete.ThumbnailImagePath.Split('/').Last();
                 System.IO.File.Delete($"{_webHostEnvironment.ContentRootPath}\\wwwroot\\uploads\\{fileName}");
             }
-
+            
             _appDataContext.Categories.Remove(categoryToDelete);
             bool changesPersistToDatabase = await PersistChangesToDatabase();
             if (!changesPersistToDatabase)
